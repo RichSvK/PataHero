@@ -23,8 +23,8 @@ let listFracture = [
 ]
 
 let armProcedure = [
-    FractureProcedure(step: "Gunakan kain atau perban untuk menopang lengan ke dada", imagePath: "lengan-step1"),
-    FractureProcedure(step: "Kompres es yang terbungkus dengan kain untuk mengurangi bengkak", imagePath: "lengan-step2"),
+    FractureProcedure(step: "Lilitkan perban untuk membalut lengan sebagai penyangga awal", imagePath: "lengan-step1"),
+    FractureProcedure(step: "Gunakan kain segitiga untuk menopang lengan ke dada", imagePath: "lengan-step2"),
     FractureProcedure(step: "Periksa secara berkala bila ada pembengkakan lain, kesemutan, atau pucat", imagePath: "lengan-step3"),
     FractureProcedure(step: "Hubungi kontak darurat Eka Hospital", imagePath: "lengan-step4"),
 ]
@@ -36,7 +36,7 @@ let fingerProcedure = [
     FractureProcedure(step: "Hubungi kontak darurat Eka Hospital", imagePath: "jari-step4"),
 ]
 
-let handProcedure = [
+let wristProcedure = [
     FractureProcedure(step: "Gunakan kain atau perban untuk menopang pergelangan tangan", imagePath: "pergelangan-step1"),
     FractureProcedure(step: "Kompres es yang terbungkus dengan kain untuk mengurangi bengkak", imagePath: "pergelangan-step2"),
     FractureProcedure(step: "Periksa secara berkala bila ada pembengkakan lain, kesemutan, atau pucat", imagePath: "pergelangan-step3"),

@@ -2,7 +2,7 @@ import SwiftUI
 
 @main
 
-struct PataHero_Test: App {
+struct Patahero: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     var body: some Scene {
         WindowGroup {

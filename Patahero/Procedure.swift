@@ -6,7 +6,6 @@ struct Procedure: View {
     
     let fracture: DataFracture
     let fractureProcedure: [FractureProcedure]
-    let geo: GeometryProxy
     
     var totalStep: Int { fractureProcedure.count }
 
@@ -51,7 +50,7 @@ struct Procedure: View {
                         Image(fractureProcedure[step - 1].imagePath)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: geo.size.width, height: geo.size.height * 0.5)
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
                             .padding(.vertical, 10)
                             .background(Color("colorBackground"))
                         
@@ -66,7 +65,7 @@ struct Procedure: View {
                         Spacer()
                         
                         if currentStep == totalStep {
-                            CallButton(geo: geo)
+                            CallButton()
                         }
                     }
                     .padding(.vertical, 10)
@@ -97,9 +96,6 @@ struct Procedure: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .previewLayout(.sizeThatFits)
-    }
+#Preview {
+    Procedure(fracture: listFracture[0], fractureProcedure: armProcedure)
 }
