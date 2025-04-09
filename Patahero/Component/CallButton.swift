@@ -27,7 +27,6 @@ struct CallButton: View{
         .background(Color(red: 241 / 255, green: 76 / 255, blue: 66 / 255))
         .cornerRadius(40)
         .padding(.horizontal, min(20, UIScreen.main.bounds.width * 0.05))
-        .shadow(radius: 20)
         .padding(.top)
         .alert("Error", isPresented: $showCallAlert){
             Button("Ok") {

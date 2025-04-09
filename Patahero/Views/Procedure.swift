@@ -12,7 +12,7 @@ struct Procedure: View {
     var body: some View {
         VStack {
             // Header
-            HStack{
+            HStack {
                 Text(fracture.name)
                     .font(.custom("Optima-ExtraBlack", size: 14))
                     .padding(.horizontal, 20)
@@ -27,7 +27,7 @@ struct Procedure: View {
                 }) {
                     Image(systemName: "xmark")
                         .foregroundColor(.red)
-                        .font(.system(size: 20, weight: .bold))
+                        .bold(true)
                 }
                 .padding(.horizontal, 20)
             }
@@ -35,47 +35,32 @@ struct Procedure: View {
             .overlay(
                 Rectangle()
                     .frame(height: 1)
-                    .opacity(0.3)
-                    .shadow(color: Color.black.opacity(1), radius: 5, x: 0, y: 5)
-                , alignment: .bottom
+                    .opacity(0.3),
+                alignment: .bottom
             )
 
             // Progress Bar
             MultiStepProgressBar(numberOfSteps: totalStep, currentStep: $currentStep)
                 .padding(.vertical, 10)
                 .padding(.horizontal, 20)
-            
-            // Swipeable Steps
+
+            // Card Steps
             TabView(selection: $currentStep) {
                 ForEach(1...totalStep, id: \.self) { step in
                     VStack {
-                        Image(fractureProcedure[step - 1].imagePath)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.5)
-                            .padding(.vertical, 10)
-                            .background(Color("colorBackground"))
-                        
-                        VStack(alignment: .leading) {
-                            Text(fractureProcedure[step - 1].step)
-                        }
-                        .font(.system(size: 20, weight: .regular))
-                        .multilineTextAlignment(.center)
-                        .padding(10)
-                        .foregroundColor(.black)
-                        
-                        Spacer()
-                        
-                        if currentStep == totalStep {
-                            CallButton()
-                        }
+                        CardStep(
+                            procedure: fractureProcedure[step - 1],
+                            cardWidth: UIScreen.main.bounds.width * 0.85,
+                            cardHeight: UIScreen.main.bounds.height * 0.55
+                        )
+
+                        Spacer(minLength: 30)
                     }
-                    .padding(.vertical, 10)
-                    .background(.white)
                     .tag(step)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
+            .frame(height: UIScreen.main.bounds.height * 0.6) // Batasi tinggi swipeable area
             .gesture(DragGesture()
                 .onEnded { value in
                     let threshold: CGFloat = 50
@@ -86,6 +71,13 @@ struct Procedure: View {
                     }
                 }
             )
+
+            Spacer()
+
+            if currentStep == totalStep {
+                CallButton()
+                    .padding(.bottom, 20) // Jarak tombol ke bawah layar
+            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -93,9 +85,10 @@ struct Procedure: View {
                 EmptyView()
             }
         }
-        .background(Color(.white))
+        .background(Color(.systemGray6))
         .ignoresSafeArea(edges: .bottom)
     }
+
 }
 
 #Preview {

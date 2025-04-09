@@ -11,6 +11,10 @@ struct CardButton<Destination: View>: View {
                 .fill(Color.white)
                 .frame(height: UIScreen.main.bounds.height * 0.15)
                 .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.gray, lineWidth: 1) // Border!
+                )
+                .overlay(
                     HStack {
                         Image(imageName)
                             .resizable()
@@ -26,7 +30,6 @@ struct CardButton<Destination: View>: View {
                     }
                     .padding()
                 )
-                .shadow(radius: 10, x: 0, y: 3)
         }
     }
 }
