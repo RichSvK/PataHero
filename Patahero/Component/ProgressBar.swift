@@ -4,12 +4,6 @@ struct MultiStepProgressBar: View {
     let numberOfSteps: Int
     @Binding var currentStep: Int
     
-    
-    init(numberOfSteps: Int = 4, currentStep: Int = 1, currentStepBinding: Binding<Int>) {
-        self.numberOfSteps = numberOfSteps
-        self._currentStep = currentStepBinding
-    }
-    
     var body: some View {
         HStack(spacing: 0) {
             ForEach(1...numberOfSteps, id: \.self) { step in
@@ -58,37 +52,13 @@ struct ConnectingLine: View {
     }
 }
 
-struct ProgressBar: View {
-    @State private var currentStep: Int = 1
-    
-    var body: some View {
-        VStack(spacing: 30) {
-            MultiStepProgressBar(numberOfSteps: 4, currentStep: currentStep, currentStepBinding: $currentStep)
-            Text("Current Step: \(currentStep) of 4")
-                .font(.headline)
-            
-            HStack(spacing: 20) {
-                Button("Previous") {
-                    if currentStep > 1 {
-                        currentStep -= 1
-                    }
-                }
-                .disabled(currentStep <= 1)
-                .buttonStyle(.borderedProminent)
-                
-                Button("Next") {
-                    if currentStep < 4 {
-                        currentStep += 1
-                    }
-                }
-                .disabled(currentStep >= 4)
-                .buttonStyle(.borderedProminent)
-            }
-        }
-        .padding()
+struct ProgressBarPreviews: View {
+    @State var step = 1
+    var body : some View {
+        MultiStepProgressBar(numberOfSteps: 4, currentStep: $step)
     }
 }
 
 #Preview {
-    ProgressBar()
+    ProgressBarPreviews()
 }

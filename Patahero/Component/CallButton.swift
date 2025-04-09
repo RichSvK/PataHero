@@ -16,7 +16,7 @@ struct CallButton: View{
                 Image(systemName: "phone.fill")
                     .font(.system(size: adaptiveFontSize(for: UIScreen.main.bounds.width, baseSize: 25)))
                 
-                Text("Call Eka Hospital")
+                Text("Hubungi Eka Hospital")
                     .fontWeight(.semibold)
                     .font(.system(size: adaptiveFontSize(for: UIScreen.main.bounds.width, baseSize: 25)))
             }
@@ -34,7 +34,7 @@ struct CallButton: View{
                 showCallAlert = false
             }
         } message: {
-            Text("Error calling Eka Hospital.")
+            Text("Gagal menghubungi Eka Hospital.")
         }
     }
 }

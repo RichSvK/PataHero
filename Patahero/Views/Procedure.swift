@@ -17,6 +17,8 @@ struct Procedure: View {
                     .font(.custom("Optima-ExtraBlack", size: 14))
                     .padding(.horizontal, 20)
                     .foregroundColor(.black)
+                    .dynamicTypeSize(.medium ... .xxLarge)
+                    .minimumScaleFactor(0.8)
                 
                 Spacer()
                 
@@ -39,7 +41,7 @@ struct Procedure: View {
             )
 
             // Progress Bar
-            MultiStepProgressBar(numberOfSteps: totalStep, currentStep: currentStep, currentStepBinding: $currentStep)
+            MultiStepProgressBar(numberOfSteps: totalStep, currentStep: $currentStep)
                 .padding(.vertical, 10)
                 .padding(.horizontal, 20)
             
@@ -73,7 +75,7 @@ struct Procedure: View {
                     .tag(step)
                 }
             }
-            .tabViewStyle(.page(indexDisplayMode: .never)) // Mengaktifkan swipe
+            .tabViewStyle(.page(indexDisplayMode: .never))
             .gesture(DragGesture()
                 .onEnded { value in
                     let threshold: CGFloat = 50
