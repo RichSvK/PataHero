@@ -27,10 +27,10 @@ struct StepCircle: View {
     var body: some View {
         ZStack {
             Circle()
-                .fill(isCompleted ? Color(hex: "0043CE") : .clear)
+                .fill(isCompleted ? Color("stepCircleColor") : .clear)
                 .overlay(
                     Circle()
-                        .stroke(isCompleted ? Color(hex: "0043CE") : .gray, lineWidth: 2)
+                        .stroke(isCompleted ? Color("stepCircleColor") : .gray, lineWidth: 2)
                 )
                 .frame(width: 35, height: 35)
             
@@ -46,7 +46,7 @@ struct ConnectingLine: View {
     
     var body: some View {
         Rectangle()
-            .fill(isActive ? Color(hex: "0043CE") : Color.gray)
+            .fill(isActive ? Color("stepCircleColor") : Color.gray)
             .frame(height: 2)
             .frame(maxWidth: .infinity)
     }

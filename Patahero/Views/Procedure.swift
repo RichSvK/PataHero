@@ -3,25 +3,24 @@ import SwiftUI
 struct Procedure: View {
     @State private var currentStep: Int = 1
     @Environment(\.dismiss) var dismiss
-    
+
     let fracture: DataFracture
     let fractureProcedure: [FractureProcedure]
-    
+
     var totalStep: Int { fractureProcedure.count }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             // Header
             HStack {
                 Text(fracture.name)
                     .font(.custom("Optima-ExtraBlack", size: 14))
                     .padding(.horizontal, 20)
-                    .foregroundColor(.black)
                     .dynamicTypeSize(.medium ... .xxLarge)
                     .minimumScaleFactor(0.8)
-                
+
                 Spacer()
-                
+
                 Button(action: {
                     dismiss()
                 }) {
@@ -41,26 +40,29 @@ struct Procedure: View {
 
             // Progress Bar
             MultiStepProgressBar(numberOfSteps: totalStep, currentStep: $currentStep)
-                .padding(.vertical, 10)
+                .padding(.vertical, 20)
                 .padding(.horizontal, 20)
 
-            // Card Steps
+            // TabView Area
             TabView(selection: $currentStep) {
                 ForEach(1...totalStep, id: \.self) { step in
                     VStack {
-                        CardStep(
-                            procedure: fractureProcedure[step - 1],
-                            cardWidth: UIScreen.main.bounds.width * 0.85,
-                            cardHeight: UIScreen.main.bounds.height * 0.55
-                        )
+                        StepCard(procedure: fractureProcedure[step - 1])
 
-                        Spacer(minLength: 30)
+                        Spacer()
+                    
+                        if currentStep == totalStep {
+                            CallButton()
+                                .padding(.bottom, 20)
+                        }
+                        
                     }
+                    .padding(.horizontal, 20)
                     .tag(step)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .frame(height: UIScreen.main.bounds.height * 0.6) // Batasi tinggi swipeable area
+            .frame(height: UIScreen.main.bounds.height * 0.7) // Jaga posisi kartu tetap
             .gesture(DragGesture()
                 .onEnded { value in
                     let threshold: CGFloat = 50
@@ -71,24 +73,17 @@ struct Procedure: View {
                     }
                 }
             )
-
-            Spacer()
-
-            if currentStep == totalStep {
-                CallButton()
-                    .padding(.bottom, 20) // Jarak tombol ke bawah layar
-            }
         }
+        .frame(maxHeight: .infinity, alignment: .top) // Pastikan seluruh layout dari atas
+        .background(Color(.systemGray6))
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 EmptyView()
             }
         }
-        .background(Color(.systemGray6))
         .ignoresSafeArea(edges: .bottom)
     }
-
 }
 
 #Preview {

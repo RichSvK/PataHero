@@ -1,36 +1,33 @@
 import SwiftUI
 
-struct CardStep: View {
+struct StepCard: View {
     let procedure: FractureProcedure
-    let cardWidth: CGFloat
-    let cardHeight: CGFloat
     
     var body: some View {
         VStack(spacing: 0) {
             Image(procedure.imagePath)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .cornerRadius(25)
-                .frame(width: cardWidth)
+                .frame(maxWidth: UIScreen.main.bounds.width * 0.8, maxHeight: UIScreen.main.bounds.height * 0.5)
                 .padding(.all, 20)
-            
-            Spacer()
-            
+                        
             Text(procedure.step)
+                .font(.title2)
                 .fontWeight(.medium)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .minimumScaleFactor(0.8)
-                .padding(.all, 20)
                 .frame(maxWidth: .infinity, alignment: .center)
-
+                .padding(.all, 20)
+                .foregroundColor(.black)
         }
-        .frame(width: cardWidth, height: cardHeight)
+        .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.6)
         .background(.white)
         .cornerRadius(25)
     }
 }
 
 #Preview {
-    CardStep(procedure: armProcedure[0], cardWidth: UIScreen.main.bounds.width, cardHeight: UIScreen.main.bounds.height * 0.8)
+    StepCard(procedure: armProcedure[2])
 }

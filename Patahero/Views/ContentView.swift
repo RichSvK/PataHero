@@ -7,19 +7,17 @@ struct ContentView: View {
         NavigationView{
             VStack(alignment: .leading) {
                 Text("Butuh Panduan?")
-                    .font(.system(size: adaptiveFontSize(for: UIScreen.main.bounds.width, baseSize: 25)))
+                    .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(.black)
                     .dynamicTypeSize(.medium ... .xxLarge)
                     .minimumScaleFactor(0.8)
                     .padding(.horizontal, 20)
                     .lineLimit(1)
                                         
-                Text("Pilih jenis patah tulang untuk penanganan pertolongan pertama")
-                    .font(.system(size: adaptiveFontSize(for: UIScreen.main.bounds.width * 0.6, baseSize: 20)))
-                    .foregroundColor(.black)
-                    .dynamicTypeSize(.medium ... .large)
-                    .minimumScaleFactor(0.6)
+                Text("Pilih panduan penanganan patah tulang")
+                    .font(.title2)
+                    .dynamicTypeSize(.medium ... .xxLarge)
+                    .minimumScaleFactor(0.8)
                     .padding(.horizontal, 20)
                     .padding(.bottom, 20)
                     .lineLimit(2)
@@ -35,8 +33,7 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    // Call Button
-                    CallButton()
+                    CallButton().padding(.bottom)
                 }
             }
         }

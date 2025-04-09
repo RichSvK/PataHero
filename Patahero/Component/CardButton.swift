@@ -22,9 +22,12 @@ struct CardButton<Destination: View>: View {
                             .frame(width: UIScreen.main.bounds.width * 0.2)
                         
                         Text(title)
-                            .font(.system(size: adaptiveFontSize(for: UIScreen.main.bounds.width, baseSize: 20), weight: .bold))
+                            .font(.title3)
                             .foregroundColor(.black)
                             .multilineTextAlignment(.leading)
+                            .dynamicTypeSize(.medium ... .xxLarge)
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(2)
                         
                         Spacer()
                     }

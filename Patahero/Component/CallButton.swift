@@ -14,11 +14,15 @@ struct CallButton: View{
         }) {
             HStack {
                 Image(systemName: "phone.fill")
-                    .font(.system(size: adaptiveFontSize(for: UIScreen.main.bounds.width, baseSize: 25)))
+                    .font(.title2)
+                    .dynamicTypeSize(.medium ... .xxLarge)
                 
                 Text("Hubungi Eka Hospital")
+                    .font(.title2)
                     .fontWeight(.semibold)
-                    .font(.system(size: adaptiveFontSize(for: UIScreen.main.bounds.width, baseSize: 25)))
+                    .dynamicTypeSize(.medium ... .xxLarge)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
             }
             .foregroundColor(.white)
             .padding()
