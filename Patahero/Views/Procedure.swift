@@ -1,23 +1,23 @@
 import SwiftUI
+import SwiftData
 
 struct Procedure: View {
     @State private var currentStep: Int = 1
     @Environment(\.dismiss) var dismiss
 
-    let fracture: DataFracture
-    let fractureProcedure: [FractureProcedure]
-
-    var totalStep: Int { fractureProcedure.count }
+    let fracture: Fracture
+    var totalStep: Int { fracture.procedure.count }
 
     var body: some View {
         VStack(spacing: 0) {
             // Header
             HStack {
                 Text(fracture.name)
-                    .font(.custom("Optima-ExtraBlack", size: 14))
+                    .font(.title)
                     .padding(.horizontal, 20)
-                    .dynamicTypeSize(.medium ... .xxLarge)
-                    .minimumScaleFactor(0.8)
+                    .dynamicTypeSize(.medium ... .large)
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
 
                 Spacer()
 
@@ -45,12 +45,14 @@ struct Procedure: View {
 
             // TabView Area
             TabView(selection: $currentStep) {
-                ForEach(1...totalStep, id: \.self) { step in
+                let orderedProcedures = fracture.procedure.sorted { $0.order < $1.order }
+
+                ForEach(Array(orderedProcedures.enumerated()), id: \.element.id) { index, procedure in
                     VStack {
-                        StepCard(procedure: fractureProcedure[step - 1])
+                        StepCard(procedure: procedure)
 
                         Spacer()
-                    
+
                         if currentStep == totalStep {
                             CallButton()
                                 .padding(.bottom, 20)
@@ -58,11 +60,10 @@ struct Procedure: View {
                         
                     }
                     .padding(.horizontal, 20)
-                    .tag(step)
+                    .tag(index + 1)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .frame(height: UIScreen.main.bounds.height * 0.7) // Jaga posisi kartu tetap
             .gesture(DragGesture()
                 .onEnded { value in
                     let threshold: CGFloat = 50
@@ -87,5 +88,5 @@ struct Procedure: View {
 }
 
 #Preview {
-    Procedure(fracture: listFracture[0], fractureProcedure: armProcedure)
+    Procedure(fracture: listFracture[2])
 }

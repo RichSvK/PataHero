@@ -35,7 +35,8 @@ struct StepCircle: View {
                 .frame(width: 35, height: 35)
             
             Text("\(number)")
-                .font(.headline)
+                .font(.title3)
+                .dynamicTypeSize(.medium ... .xxLarge)
                 .foregroundColor(isCompleted ? .white : .gray)
         }
     }

@@ -38,5 +38,5 @@ struct CardButton<Destination: View>: View {
 }
 
 #Preview {
-    CardButton(imageName: listFracture[0].imagePath, title: listFracture[0].name, destination: Procedure(fracture: listFracture[0], fractureProcedure: armProcedure))
+    CardButton(imageName: listFracture[0].imagePath, title: listFracture[0].name, destination: Procedure(fracture: listFracture[0]))
 }
