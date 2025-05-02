@@ -3,6 +3,7 @@ import SwiftData
 
 struct ContentView: View {
     @AppStorage("hasSeededInitialData") private var hasSeededInitialData: Bool = false
+    @FocusState private var isFocused: Bool
 
     @State var procedure = listFracture[0]
     @State var searchFractureText = ""
@@ -88,16 +89,24 @@ struct ContentView: View {
                     .padding(.bottom, 10)
 
                     // Search bar
-                    TextField("Cari jenis cedera", text: $searchFractureText)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
-                        .dynamicTypeSize(.xSmall ... .xxLarge)
-                        .textFieldStyle(.roundedBorder)
-                        .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray, lineWidth: 1.5)
-                            )
-                        .padding(.vertical, 10)
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(Color("ColorText"))
+                            .onTapGesture {
+                                isFocused = true
+                            }
+
+                        TextField("Cari jenis cedera", text: $searchFractureText)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                            .dynamicTypeSize(.xSmall ... .xxLarge)
+                            .focused($isFocused)
+                    }
+                    .padding(10)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .textFieldStyle(PlainTextFieldStyle())
+
                     
                     // Filter Kategori
                     Picker("Kategori", selection: $selectedCategory) {
