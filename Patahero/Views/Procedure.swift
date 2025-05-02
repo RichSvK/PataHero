@@ -77,7 +77,6 @@ struct Procedure: View {
             )
         }
         .frame(maxHeight: .infinity, alignment: .top)
-        .background(Color(.systemGray6))
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {

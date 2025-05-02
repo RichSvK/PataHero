@@ -26,10 +26,8 @@ struct CardButton<Destination: View>: View {
             .frame(maxWidth: .infinity, alignment: .center)
             .frame(height: 200)
             .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.gray, lineWidth: 1)
-            )
+            .background(Color("ColorCard"))
+            .cornerRadius(8)
         }
     }
 }
