@@ -89,39 +89,78 @@ struct ContentView: View {
                     .padding(.bottom, 10)
 
                     // Search bar
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color("ColorText"))
-                            .onTapGesture {
-                                isFocused = true
+                    HStack{
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(Color("ColorText"))
+                                .onTapGesture {
+                                    isFocused = true
+                                }
+
+                            TextField("Cari jenis cedera", text: $searchFractureText)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.8)
+                                .dynamicTypeSize(.xSmall ... .xxLarge)
+                                .focused($isFocused)
+                        }
+                        .padding(10)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        
+                        Menu {
+                            Button {
+                                selectedCategory = "Semua"
+                            } label: {
+                                Label{
+                                    Text("Semua")
+                                } icon: {
+                                    if selectedCategory == "Semua" {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(.blue)
+                                    } else {
+                                        EmptyView()
+                                    }
+                                }
                             }
 
-                        TextField("Cari jenis cedera", text: $searchFractureText)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.8)
-                            .dynamicTypeSize(.xSmall ... .xxLarge)
-                            .focused($isFocused)
-                    }
-                    .padding(10)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(8)
-                    .textFieldStyle(PlainTextFieldStyle())
-
-                    
-                    // Filter Kategori
-                    Picker("Kategori", selection: $selectedCategory) {
-                        ForEach(categories, id: \.self) { category in
-                            Text("Kategori: \(category)")
-                                .padding(.horizontal)
-                                .background(Color.gray)
-                                .tag(category)
+                            Button {
+                                selectedCategory = "Kaki"
+                            } label: {
+                                Label{
+                                    Text("Kaki")
+                                } icon: {
+                                    if selectedCategory == "Kaki" {
+                                        Image(systemName: "checkmark")
+                                    } else {
+                                        EmptyView()
+                                    }
+                                }
+                            }
+                            
+                            Button {
+                                selectedCategory = "Tangan"
+                            } label: {
+                                Label{
+                                    Text("Tangan")
+                                } icon: {
+                                    if selectedCategory == "Tangan" {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(.blue)
+                                    } else {
+                                        EmptyView()
+                                    }
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "line.3.horizontal.decrease")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .padding(10)
+                                .background(Color(.systemGray6))
+                                .cornerRadius(8)
                         }
                     }
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-                    .dynamicTypeSize(.xSmall ... .xxLarge)
-                    .pickerStyle(MenuPickerStyle())
-                    .padding(.bottom)
                     
                     // List panduan
                     LazyVGrid(columns: columns, spacing: 10) {
