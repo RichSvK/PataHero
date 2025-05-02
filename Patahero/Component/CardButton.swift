@@ -7,32 +7,29 @@ struct CardButton<Destination: View>: View {
     
     var body: some View {
         NavigationLink(destination: destination) {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.white)
-                .frame(height: UIScreen.main.bounds.height * 0.15)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.gray, lineWidth: 1) // Border!
-                )
-                .overlay(
-                    HStack {
-                        Image(imageName)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: UIScreen.main.bounds.width * 0.2)
-                        
-                        Text(title)
-                            .font(.title3)
-                            .foregroundColor(.black)
-                            .multilineTextAlignment(.leading)
-                            .dynamicTypeSize(.medium ... .xxLarge)
-                            .minimumScaleFactor(0.8)
-                            .lineLimit(2)
-                        
-                        Spacer()
-                    }
-                    .padding()
-                )
+            VStack {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: UIScreen.main.bounds.width * 0.4)
+                
+                Text(title)
+                    .font(.title3)
+                    .foregroundColor(Color("ColorText"))
+                    .multilineTextAlignment(.center)
+                    .dynamicTypeSize(.medium ... .xxLarge)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(2)
+                
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+            .frame(height: 200)
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.gray, lineWidth: 1)
+            )
         }
     }
 }

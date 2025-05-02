@@ -1,6 +1,7 @@
 // Data Fracture
 let listFracture = [
-    Fracture(name: "Tulang Lengan", imagePath: "lengan", description: "Sebuah deskripsi patah tulang lengan", category: "tangan"),
-    Fracture(name: "Tulang Jari", imagePath: "jari", description: "Sebuah deskripsi patah tulang jari", category: "tangan"),
-    Fracture(name: "Tulang Pergelangan Tangan", imagePath: "pergelangan", description: "Sebuah deskripsi patah tulang pergelangna tangan", category: "tangan"),
+    Fracture(name: "Lengan", imagePath: "lengan", category: "Tangan"),
+    Fracture(name: "Jari tangan", imagePath: "jari", category: "Tangan"),
+    Fracture(name: "Pergelangan tangan", imagePath: "pergelangan", category: "Tangan"),
+    Fracture(name: "Pergelangan kaki", imagePath: "pergelangan", category: "Kaki"),
 ]

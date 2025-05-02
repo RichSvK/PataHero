@@ -21,10 +21,9 @@ struct StepCard: View {
                 .minimumScaleFactor(0.8)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.all, 20)
-                .foregroundColor(.black)
         }
         .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.6)
-        .background(.white)
+        .background(Color("ColorCard"))
         .cornerRadius(25)
     }
 }

@@ -28,6 +28,7 @@ struct Procedure: View {
                         .foregroundColor(.red)
                         .bold(true)
                 }
+                .dynamicTypeSize(.small ... .medium)
                 .padding(.horizontal, 20)
             }
             .frame(height: 70)
@@ -75,7 +76,7 @@ struct Procedure: View {
                 }
             )
         }
-        .frame(maxHeight: .infinity, alignment: .top) // Pastikan seluruh layout dari atas
+        .frame(maxHeight: .infinity, alignment: .top)
         .background(Color(.systemGray6))
         .navigationBarBackButtonHidden(true)
         .toolbar {

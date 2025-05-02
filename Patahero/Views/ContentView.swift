@@ -6,113 +6,159 @@ struct ContentView: View {
 
     @State var procedure = listFracture[0]
     @State var searchFractureText = ""
+    @State var selectedCategory: String = "Semua"
+
+    @Query private var fractures: [Fracture]
+
+    var categories: [String] {
+        let unique = Set(fractures.map { $0.category })
+        return ["Semua"] + unique.sorted()
+    }
     
     @Environment(\.modelContext) private var context
 
-    @Query private var fractures: [Fracture]
     
     var filteredFractures: [Fracture] {
-        if searchFractureText.isEmpty {
-            return fractures
+        let searchedResult = searchFractureText.isEmpty ? fractures : fractures.filter {$0.name.localizedCaseInsensitiveContains(searchFractureText)}
+        
+        if selectedCategory == "Semua" {
+            return searchedResult
         } else {
-            return fractures.filter { $0.name.localizedCaseInsensitiveContains(searchFractureText) }
+            return searchedResult.filter { $0.category == selectedCategory }
         }
     }
     
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading) {
-                Text("Butuh Panduan?")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .dynamicTypeSize(.medium ... .xxLarge)
-                    .minimumScaleFactor(0.8)
-                    .lineLimit(1)
-                                        
-                Text("Pilih panduan penanganan patah tulang")
-                    .font(.title2)
-                    .dynamicTypeSize(.medium ... .xxLarge)
-                    .minimumScaleFactor(0.8)
-                    .padding(.bottom, 20)
-                    .lineLimit(2)
-                
-                TextField("Cari jenis cedera", text: $searchFractureText)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(.vertical, 10)
-                
-                // List panduan
-                VStack(spacing: 20) {
-                    ForEach(filteredFractures) { item in
-                        CardButton(
-                            imageName: item.imagePath,
-                            title: item.name,
-                            destination: Procedure(fracture: item)
-                        )
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(alignment: .leading) {
+                    Text("Pilih panduan penanganan patah tulang")
+                        .font(.title2)
+                        .lineLimit(2)
+                        .dynamicTypeSize(.xSmall ... .xxLarge)
+                        .padding(.bottom, 20)
+                    
+                    HStack(spacing: 16) {
+                        // Tombol Navigasi
+                        NavigationLink(destination: MapView()) {
+                            HStack {
+                                Image(systemName: "map")
+                                Text("Navigasi")
+                                    .fontWeight(.semibold)
+                            }
+                            .font(.title2)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                            .dynamicTypeSize(.xSmall ... .xxLarge)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Color.blue)
+                            .cornerRadius(12)
+                        }
+
+                        // Tombol Hubungi
+                        Button(action: {
+                            if let phoneURL = URL(string: "tel://08998106352"),
+                               UIApplication.shared.canOpenURL(phoneURL) {
+                                UIApplication.shared.open(phoneURL)
+                            }
+                        }) {
+                            HStack {
+                                Image(systemName: "phone.fill")
+                                Text("Hubungi")
+                                    .fontWeight(.semibold)
+                            }
+                            .font(.title2)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                            .dynamicTypeSize(.xSmall ... .xxLarge)
+                            .foregroundColor(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Color.red)
+                            .cornerRadius(12)
+                        }
                     }
-                }
-                
-                Spacer()
-                
-                // Navigasi ke MapView
-                NavigationLink(destination: MapView()) {
-                    Text("Navigasi ke Eka Hospital")
-                        .font(.title3)
-                        .foregroundColor(.blue)
-                        .dynamicTypeSize(.medium ... .xxLarge)
-                        .minimumScaleFactor(0.8)
+                    .padding(.bottom, 10)
+
+                    // Search bar
+                    TextField("Cari jenis cedera", text: $searchFractureText)
                         .lineLimit(1)
-                        .frame(maxWidth: .infinity, minHeight: 0)
-                }
-                
-                CallButton()
+                        .minimumScaleFactor(0.8)
+                        .dynamicTypeSize(.xSmall ... .xxLarge)
+                        .textFieldStyle(.roundedBorder)
+                        .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray, lineWidth: 1.5)
+                            )
+                        .padding(.vertical, 10)
+                    
+                    // Filter Kategori
+                    Picker("Kategori", selection: $selectedCategory) {
+                        ForEach(categories, id: \.self) { category in
+                            Text("Kategori: \(category)")
+                                .padding(.horizontal)
+                                .background(Color.gray)
+                                .tag(category)
+                        }
+                    }
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .dynamicTypeSize(.xSmall ... .xxLarge)
+                    .pickerStyle(MenuPickerStyle())
                     .padding(.bottom)
+                    
+                    // List panduan
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(filteredFractures) { item in
+                            CardButton(
+                                imageName: item.imagePath,
+                                title: item.name,
+                                destination: Procedure(fracture: item)
+                            )
+                        }
+                    }
+                    .padding()
+                    Spacer()
+                }
+                .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 20)
         }
         .onAppear {
             if !hasSeededInitialData {
                 seedAppData(using: context)
             }
         }
+
     }
     
     private func seedAppData(using context: ModelContext) {
-        var procedureIndex = 0
+        let allProcedures = [armProcedure, fingerProcedure, wristProcedure, footProcedure]
+
         Task{
-            
-            for fracture in listFracture {
-                switch procedureIndex {
-                case 0:
-                    for procedure in armProcedure {
+            for (index, fracture) in listFracture.enumerated() {
+                if index < allProcedures.count {
+                    for procedure in allProcedures[index] {
                         fracture.procedure.append(procedure)
                         procedure.fracture = fracture
                         context.insert(procedure)
                     }
-                case 1:
-                    for procedure in fingerProcedure {
-                        fracture.procedure.append(procedure)
-                        procedure.fracture = fracture
-                    }
-                case 2:
-                    for procedure in wristProcedure {
-                        fracture.procedure.append(procedure)
-                        procedure.fracture = fracture
-                    }
-                default:
-                    break
                 }
-
                 context.insert(fracture)
-                
-                procedureIndex += 1
             }
-        }
-        
-        do {
-            try context.save()
-            self.hasSeededInitialData = true
-        } catch {
-            print("Gagal menyimpan data awal: \(error.localizedDescription)")
+            
+            do {
+                try context.save()
+                self.hasSeededInitialData = true
+            } catch {
+                print("Gagal menyimpan data awal: \(error.localizedDescription)")
+            }
         }
     }
 }
