@@ -20,5 +20,8 @@ let wristProcedure = [
 ]
 
 let footProcedure = [
-    FractureProcedure(step: "Hubungi kontak darurat Eka Hospital", imagePath: "pergelangan-step4", order: 1),
+    FractureProcedure(step: "Segera jauhkan dari aktivitas dan hentikan beban pada kaki yang cedera", imagePath: "pergelangan-step1", order: 1),
+    FractureProcedure(step: "Stabilkan pergelangan kaki dengan bidai atau bantalan yang kokoh", imagePath: "pergelangan-step2", order: 2),
+    FractureProcedure(step: "Gunakan kompres dingin untuk mengurangi pembengkakan", imagePath: "pergelangan-step3", order: 3),
+    FractureProcedure(step: "Hubungi kontak darurat Eka Hospital", imagePath: "pergelangan-step4", order: 4),
 ]
