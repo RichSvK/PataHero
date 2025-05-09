@@ -5,7 +5,7 @@ struct CallButton: View{
     
     var body: some View {
         Button(action: {
-            if let phoneURL = URL(string: "tel://08998106352"), UIApplication.shared.canOpenURL(phoneURL){
+            if let phoneURL = URL(string: "tel://081360986278"), UIApplication.shared.canOpenURL(phoneURL){
                 UIApplication.shared.open(phoneURL)
                 showCallAlert = false
             } else {

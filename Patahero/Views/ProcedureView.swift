@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-struct Procedure: View {
+struct ProcedureView: View {
     @State private var currentStep: Int = 1
     @Environment(\.dismiss) var dismiss
 
@@ -54,11 +54,8 @@ struct Procedure: View {
 
                         Spacer()
 
-                        if currentStep == totalStep {
-                            CallButton()
-                                .padding(.bottom, 20)
-                        }
-                        
+                        CallButton()
+                            .padding(.bottom, 20)
                     }
                     .padding(.horizontal, 20)
                     .tag(index + 1)
@@ -88,5 +85,5 @@ struct Procedure: View {
 }
 
 #Preview {
-    Procedure(fracture: listFracture[2])
+    ProcedureView(fracture: listFracture[2])
 }
