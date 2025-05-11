@@ -1,35 +1,16 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
-    @AppStorage("hasSeededInitialData") private var hasSeededInitialData: Bool = false
-    @Environment(\.modelContext) private var context
-
+class ContentViewModel: ObservableObject {
+    @AppStorage("hasSeededInitialData") private(set) var hasSeededInitialData: Bool = false
     
-    var body: some View {
-        TabView{
-            ChooseProcedureView()
-                .tabItem {
-                    Image(systemName: "list.bullet")
-                    Text("Pilih")
-                }
-            
-            MapView()
-                .tabItem{
-                    Image(systemName: "house.fill")
-                    Text("Eka Hospital")
-                }
-        }
-        .onAppear {
-            if !hasSeededInitialData {
-                seedAppData(using: context)
-            }
-        }
-    }
-    
-    private func seedAppData(using context: ModelContext) {
+    @MainActor
+    func seedInitialData(using context: ModelContext) {
+        guard !hasSeededInitialData else { return }
+        print("Seeding Data")
+        
         let allProcedures = [armProcedure, fingerProcedure, wristProcedure, footProcedure]
-
+        
         Task{
             for (index, fracture) in listFracture.enumerated() {
                 if index < allProcedures.count {
@@ -50,8 +31,4 @@ struct ContentView: View {
             }
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

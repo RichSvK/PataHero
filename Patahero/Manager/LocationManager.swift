@@ -2,63 +2,74 @@ import SwiftUI
 import MapKit
 import CoreLocation
 
-@Observable
-class LocationManager: NSObject, CLLocationManagerDelegate {
-    private var locationManager: CLLocationManager?
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published private var locationManager: CLLocationManager = CLLocationManager()
     private var hasSetInitialRegion = false
 
-    var userLocation: CLLocationCoordinate2D?
-    var region: MapCameraPosition = .region(
-        MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
-            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        )
+    @Published var userLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    @Published var region: MKCoordinateRegion = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
-
+    
+    override init() {
+        super.init()
+        print("Initialize LocationManager")
+        start()
+    }
+    
     func start() {
-        if CLLocationManager.locationServicesEnabled() {
-           locationManager = CLLocationManager()
-            locationManager?.delegate = self
-        } else {
-            print("Berikan izin akses lokasi pada Settings")
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        // Cek status otorisasi sebelum meminta izin
+        let authStatus = locationManager.authorizationStatus
+        switch authStatus {
+            case .notDetermined:
+                print("Meminta izin lokasi...")
+                locationManager.requestWhenInUseAuthorization()
+            case .authorizedWhenInUse, .authorizedAlways:
+                print("Lokasi diizinkan, memulai pembaruan lokasi")
+                locationManager.startUpdatingLocation()
+            case .restricted, .denied:
+                print("Akses lokasi ditolak")
+            default:
+                print("Status otorisasi tidak diketahui")
         }
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
-            case .notDetermined:
-                manager.requestWhenInUseAuthorization()
-
-            case .authorizedWhenInUse, .authorizedAlways:
-                manager.startUpdatingLocation()
-
-            case .restricted, .denied:
-                print("Akses lokasi ditolak")
-
-            @unknown default:
-                break
+        case .authorizedWhenInUse, .authorizedAlways:
+            print("Izin diberikan, memulai pembaruan lokasi")
+            manager.startUpdatingLocation()
+        case .restricted, .denied:
+            print("Akses lokasi ditolak")
+        case .notDetermined:
+            print("Izin belum ditentukan")
+        @unknown default:
+            break
         }
     }
 
     private func updateRegion(to coordinate: CLLocationCoordinate2D) {
-        self.userLocation = coordinate
-        self.region = .region(
-            MKCoordinateRegion(
+        DispatchQueue.main.async {
+            self.userLocation = coordinate
+            self.region = MKCoordinateRegion(
                 center: coordinate,
                 span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             )
-        )
+        }
     }
 
-    // Callback saat lokasi diperbarui
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coordinate = locations.last?.coordinate else { return }
-
         self.userLocation = coordinate
-
+        
         if !hasSetInitialRegion {
             updateRegion(to: coordinate)
             hasSetInitialRegion = true
         }
+        print("Lokasi pengguna diperbarui: \(coordinate.latitude), \(coordinate.longitude)")
     }
 }

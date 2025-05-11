@@ -7,7 +7,7 @@ struct MultiStepProgressBar: View {
     var body: some View {
         HStack(spacing: 0) {
             ForEach(1...numberOfSteps, id: \.self) { step in
-                StepCircle(number: step, isCompleted: step <= currentStep)
+                StepCircle(isCompleted: step <= currentStep)
                     .onTapGesture {
                         currentStep = step
                 }
@@ -21,24 +21,16 @@ struct MultiStepProgressBar: View {
 }
 
 struct StepCircle: View {
-    let number: Int
     let isCompleted: Bool
     
     var body: some View {
-        ZStack {
-            Circle()
-                .fill(isCompleted ? Color("stepCircleColor") : .clear)
-                .overlay(
-                    Circle()
-                        .stroke(isCompleted ? Color("stepCircleColor") : .gray, lineWidth: 2)
-                )
-                .frame(width: 35, height: 35)
-            
-            Text("\(number)")
-                .font(.title3)
-                .dynamicTypeSize(.medium ... .xxLarge)
-                .foregroundColor(isCompleted ? .white : .gray)
-        }
+        Circle()
+            .fill(isCompleted ? Color("stepCircleColor") : .clear)
+            .overlay(
+                Circle()
+                    .stroke(isCompleted ? Color("stepCircleColor") : .gray, lineWidth: 2)
+            )
+            .frame(width: 35, height: 35)
     }
 }
 

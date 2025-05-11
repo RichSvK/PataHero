@@ -32,7 +32,7 @@ struct CallButton: View{
         .cornerRadius(40)
         .padding(.top)
         .alert("Error", isPresented: $showCallAlert){
-            Button("Ok") {
+            Button("Silahkan coba lagi") {
                 showCallAlert = false
             }
         } message: {
