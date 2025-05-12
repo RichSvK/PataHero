@@ -16,9 +16,6 @@ struct StepCard: View {
                 .font(.title2)
                 .fontWeight(.medium)
                 .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .dynamicTypeSize(.medium ... .xxLarge)
-                .minimumScaleFactor(0.8)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.all, 20)
         }

@@ -25,10 +25,10 @@ struct StepCircle: View {
     
     var body: some View {
         Circle()
-            .fill(isCompleted ? Color("stepCircleColor") : .clear)
+            .fill(isCompleted ? Color("ColorStepCircle") : .clear)
             .overlay(
                 Circle()
-                    .stroke(isCompleted ? Color("stepCircleColor") : .gray, lineWidth: 2)
+                    .stroke(isCompleted ? Color("ColorStepCircle") : .gray, lineWidth: 2)
             )
             .frame(width: 35, height: 35)
     }
@@ -39,7 +39,7 @@ struct ConnectingLine: View {
     
     var body: some View {
         Rectangle()
-            .fill(isActive ? Color("stepCircleColor") : Color.gray)
+            .fill(isActive ? Color("ColorStepCircle") : Color.gray)
             .frame(height: 2)
             .frame(maxWidth: .infinity)
     }

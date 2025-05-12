@@ -9,7 +9,7 @@ class ContentViewModel: ObservableObject {
         guard !hasSeededInitialData else { return }
         print("Seeding Data")
         
-        let allProcedures = [armProcedure, fingerProcedure, wristProcedure, footProcedure]
+        let allProcedures = [armProcedure, fingerProcedure, wristProcedure, ankleProcedure, toesProcedure, fibulaProcedure]
         
         Task{
             for (index, fracture) in listFracture.enumerated() {
