@@ -4,11 +4,13 @@ import Combine
 
 class HospitalViewModel: ObservableObject {
     @Published var cameraPosition: MapCameraPosition = .automatic
-    @Published var route: MKRoute?
+    @Published var route: MKRoute? = nil
     @Published var userLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     @Published var userLocationReady: Bool = false
     @Published var mapView = MKMapView()
     @Published var locationManager = LocationManager()
+    @Published var showCallAlert = false
+    private let phoneNumber = "081360986278"
 
     let hospitalLocation = CLLocationCoordinate2D(latitude: -6.298920889533608, longitude: 106.66991187639381)
     private var cancellables = Set<AnyCancellable>()
@@ -19,6 +21,7 @@ class HospitalViewModel: ObservableObject {
             .sink { [weak self] newLocation in
                 self?.userLocation = newLocation
                 self?.userLocationReady = true
+                self?.requestRoute()
             }
             .store(in: &cancellables)
     }
@@ -48,6 +51,15 @@ class HospitalViewModel: ObservableObject {
             } else {
                 print("Tidak ada rute ditemukan dan tidak ada error")
             }
+        }
+    }
+    
+    func makePhoneCall() {
+        if let phoneURL = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(phoneURL) {
+            UIApplication.shared.open(phoneURL)
+            showCallAlert = false
+        } else {
+            showCallAlert = true
         }
     }
 }

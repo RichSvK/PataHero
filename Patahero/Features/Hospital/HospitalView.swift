@@ -2,23 +2,17 @@ import SwiftUI
 import MapKit
 
 struct HospitalView: View {
-    @StateObject private var viewModel = HospitalViewModel()
-    @State private var showCallAlert = false
-    
-    private let phoneNumber = "081360986278"  // Nomor telepon rumah sakit
+    @StateObject private var viewModel = HospitalViewModel()    
     
     var body: some View {
         VStack {
-            if viewModel.userLocationReady {
-                // Peta dengan marker dan rute
+            if viewModel.userLocationReady || viewModel.route != nil {
                 ZStack {
                     Map(position: $viewModel.cameraPosition) {
-                        // Marker rumah sakit
                         Marker("Eka Hospital", systemImage: "plus.square.fill", coordinate: viewModel.hospitalLocation)
 
                         UserAnnotation()
                         
-                        // Garis biru rute
                         if let route = viewModel.route {
                             MapPolyline(route.polyline)
                                 .stroke(Color.blue, lineWidth: 5)
@@ -28,8 +22,10 @@ struct HospitalView: View {
                     .safeAreaInset(edge: .top) {
                         Spacer().frame(height: 40)
                     }
+                    .safeAreaInset(edge: .trailing) {
+                        Spacer().frame(width: 30)
+                    }
                     .ignoresSafeArea()
-                    
                     .mapControls{
                         MapCompass()
                         MapScaleView()
@@ -41,16 +37,16 @@ struct HospitalView: View {
                         
                         VStack {
                             Spacer()
-                            Button(action: makePhoneCall) {
-                                Label("Hubungi Rumah Sakit", systemImage: "phone.fill")
+                            Button(action: viewModel.makePhoneCall) {
+                                Label("Hubungi Eka Hospital", systemImage: "phone.fill")
                                     .font(.title2)
                                     .padding()
                                     .foregroundColor(.white)
-                                    .background(Color.blue)
+                                    .background(Color.red)
                                     .cornerRadius(8)
                             }
                             .padding()
-                            .alert("Tidak dapat melakukan panggilan", isPresented: $showCallAlert) {
+                            .alert("Tidak dapat melakukan panggilan", isPresented: $viewModel.showCallAlert) {
                                 Button("OK", role: .cancel) {}
                             } message: {
                                 Text("Perangkat Anda tidak mendukung panggilan telepon atau nomor tidak valid.")
@@ -63,23 +59,6 @@ struct HospitalView: View {
                     .progressViewStyle(CircularProgressViewStyle())
                     .padding()
             }
-        }
-        .onAppear {            
-            if viewModel.userLocation.latitude != 0 && viewModel.userLocation.longitude != 0 {
-                print("Lokasi Pengguna Tersedia 1")
-                viewModel.requestRoute()
-            } else {
-                print("Lokasi Pengguna Belum Tersedia 1")
-            }
-        }
-    }
-
-    private func makePhoneCall() {
-        if let phoneURL = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(phoneURL) {
-            UIApplication.shared.open(phoneURL)
-            showCallAlert = false
-        } else {
-            showCallAlert = true
         }
     }
 }

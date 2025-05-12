@@ -2,10 +2,10 @@ import SwiftUI
 import SwiftData
 
 struct ChooseProcedureView: View{
-    @StateObject var viewModel: ChooseProcedureViewModel
+    @StateObject var viewModel: ChooseProcedureViewModel = ChooseProcedureViewModel()
     @FocusState private var isFocused: Bool
     @Query private var fracturesData: [Fracture]
-
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible())
@@ -15,7 +15,7 @@ struct ChooseProcedureView: View{
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading) {
                 Text("Pilih panduan penanganan patah tulang")
-                    .font(.title)
+                    .font(.title2)
                     .lineLimit(2)
                     .dynamicTypeSize(.xSmall ... .xxLarge)
                     .padding(.bottom, 20)
@@ -89,4 +89,8 @@ struct ChooseProcedureView: View{
             isFocused = false
         }
     }
+}
+
+#Preview {
+    ChooseProcedureView()
 }

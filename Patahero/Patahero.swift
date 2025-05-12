@@ -7,7 +7,7 @@ struct Patahero: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: ContentViewModel())
+            ContentView()
         }
         .modelContainer(for: [Fracture.self, FractureProcedure.self])
         

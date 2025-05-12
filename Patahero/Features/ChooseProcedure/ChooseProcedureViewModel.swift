@@ -36,7 +36,7 @@ class ChooseProcedureViewModel: ObservableObject {
     }
 
     private func filterCategories(){
-        print("Filtering data with category: \(selectedCategory) and filter: \(searchFractureText)")
+        print("Filtering data with category: \(selectedCategory) and search: \(searchFractureText)")
         let searchedResult = searchFractureText.isEmpty ? self.allFractures : allFractures.filter {
             $0.name.localizedCaseInsensitiveContains(searchFractureText)
         }

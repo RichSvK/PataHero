@@ -2,14 +2,14 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @StateObject var viewModel: ContentViewModel
+    @StateObject var viewModel: ContentViewModel = ContentViewModel()
     @Environment(\.modelContext) var context
     
     var body: some View {
         NavigationStack{
             if viewModel.hasSeededInitialData {
                 TabView {
-                    ChooseProcedureView(viewModel: ChooseProcedureViewModel())
+                    ChooseProcedureView()
                         .tabItem {
                             Image(systemName: "list.bullet")
                             Text("Pilih")
@@ -20,6 +20,17 @@ struct ContentView: View {
                                 Image(systemName: "house.fill")
                                 Text("Eka Hospital")
                             }
+                }
+                .onAppear{
+                    let tabColor = UIColor(Color("ColorTabView"))
+                    let tabBarAppearance = UITabBarAppearance()
+                    tabBarAppearance.configureWithOpaqueBackground()
+                    tabBarAppearance.backgroundColor = tabColor
+                    
+                    UITabBar.appearance().standardAppearance = tabBarAppearance
+                    if #available(iOS 15.0, *) {
+                        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+                    }
                 }
                 .navigationTitle("Prosedur")
                 .toolbar(.hidden, for: .navigationBar)
@@ -33,4 +44,16 @@ struct ContentView: View {
             viewModel.seedInitialData(using: context)
         }
     }
+}
+
+
+struct ContentView_Previews: View {
+    @StateObject var viewModel: ContentViewModel = ContentViewModel()
+    var body: some View {
+        ContentView()
+    }
+}
+
+#Preview {
+    ContentView_Previews()
 }
