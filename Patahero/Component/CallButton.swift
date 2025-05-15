@@ -1,11 +1,12 @@
 import SwiftUI
 
-struct CallButton: View{
+struct CallButton: View {
     @State private var showCallAlert: Bool = false
+    private let phoneNumber: String = "081360986278"
     
     var body: some View {
         Button(action: {
-            if let phoneURL = URL(string: "tel://081360986278"), UIApplication.shared.canOpenURL(phoneURL){
+            if let phoneURL = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(phoneURL){
                 UIApplication.shared.open(phoneURL)
                 showCallAlert = false
             } else {
@@ -20,16 +21,16 @@ struct CallButton: View{
                 Text("Hubungi Eka Hospital")
                     .font(.title2)
                     .fontWeight(.semibold)
+                    .lineLimit(1)
                     .dynamicTypeSize(.medium ... .xxLarge)
                     .minimumScaleFactor(0.8)
-                    .lineLimit(1)
             }
             .foregroundColor(.white)
             .padding()
             .frame(maxWidth: .infinity)
         }
-        .background(Color(red: 241 / 255, green: 76 / 255, blue: 66 / 255))
-        .cornerRadius(40)
+        .background(Color(.red))
+        .cornerRadius(10)
         .padding(.top)
         .alert("Error", isPresented: $showCallAlert){
             Button("Silahkan coba lagi") {

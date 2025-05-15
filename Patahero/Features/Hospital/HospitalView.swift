@@ -2,7 +2,7 @@ import SwiftUI
 import MapKit
 
 struct HospitalView: View {
-    @StateObject private var viewModel = HospitalViewModel()    
+    @StateObject private var viewModel: HospitalViewModel = HospitalViewModel()
     
     var body: some View {
         VStack {
@@ -20,45 +20,40 @@ struct HospitalView: View {
                     }
                     .mapStyle(.standard)
                     .safeAreaInset(edge: .top) {
-                        Spacer().frame(height: 40)
+                        Spacer().frame(height: 65)
                     }
                     .safeAreaInset(edge: .trailing) {
                         Spacer().frame(width: 30)
                     }
                     .ignoresSafeArea()
                     .mapControls{
+                        MapUserLocationButton()
                         MapCompass()
                         MapScaleView()
-                        MapUserLocationButton()
                     }
 
                     VStack {
                         Spacer()
                         
-                        VStack {
-                            Spacer()
-                            Button(action: viewModel.makePhoneCall) {
-                                Label("Hubungi Eka Hospital", systemImage: "phone.fill")
-                                    .font(.title2)
-                                    .padding()
-                                    .foregroundColor(.white)
-                                    .background(Color.red)
-                                    .cornerRadius(8)
-                            }
-                            .padding()
-                            .alert("Tidak dapat melakukan panggilan", isPresented: $viewModel.showCallAlert) {
-                                Button("OK", role: .cancel) {}
-                            } message: {
-                                Text("Perangkat Anda tidak mendukung panggilan telepon atau nomor tidak valid.")
-                            }
-                        }
+                        CallButton()
+                            .padding(.all, 20)
                     }
                 }
             } else {
                 ProgressView("Menunggu Lokasi Pengguna...")
                     .progressViewStyle(CircularProgressViewStyle())
                     .padding()
-            }
+            }           
+        }
+        .onDisappear{
+            viewModel.cleanUp()
+        }
+        .onAppear {
+            viewModel.start()
         }
     }
+}
+
+#Preview{
+    HospitalView()
 }

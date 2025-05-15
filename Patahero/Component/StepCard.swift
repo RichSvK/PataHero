@@ -9,22 +9,27 @@ struct StepCard: View {
                 .resizable()
                 .scaledToFit()
                 .cornerRadius(25)
-                .frame(maxWidth: UIScreen.main.bounds.width * 0.8, maxHeight: UIScreen.main.bounds.height * 0.5)
-                .padding(.all, 20)
-                        
-            Text(procedure.step)
-                .font(.title2)
-                .fontWeight(.medium)
+                .frame(maxWidth: .infinity, maxHeight: 300)
+                .padding(.vertical, 20)
+            
+            Text("Step \(procedure.order)")
+                .font(.system(size: 20, weight: .semibold))
                 .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.all, 20)
+                
+            Text(procedure.step)
+                .font(.system(size: 16, weight: .regular))
+                .multilineTextAlignment(.center)
+                .padding(.bottom, 20)
+            
+            Spacer()
         }
-        .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.6)
+        .padding(.horizontal, 25)
+        .frame(maxWidth: .infinity, maxHeight: 440)
         .background(Color("ColorCard"))
         .cornerRadius(25)
     }
 }
 
 #Preview {
-    StepCard(procedure: armProcedure[2])
+    StepCard(procedure: ankleProcedure[0])
 }

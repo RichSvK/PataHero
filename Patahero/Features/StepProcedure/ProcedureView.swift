@@ -12,7 +12,7 @@ struct ProcedureView: View {
                 MultiStepProgressBar(numberOfSteps: viewModel.totalStep, currentStep: $viewModel.currentStep)
                     .padding(.vertical, 20)
                     .padding(.horizontal, 20)
-
+                
                 // TabView Area
                 TabView(selection: $viewModel.currentStep) {
                     ForEach(Array(viewModel.procedures.enumerated()), id: \.element.id) { index, procedure in
@@ -35,31 +35,25 @@ struct ProcedureView: View {
                     }
                 )
             }
-            .frame(maxHeight: .infinity, alignment: .top)
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    HStack {
-                        Spacer()
-                        Text(viewModel.fractureName)
-                            .font(.system(size: 16, weight: .semibold))
-                            .dynamicTypeSize(.medium ... .large)
-                            .minimumScaleFactor(0.5)
-                            .lineLimit(1)
-                            .frame(maxWidth: .infinity)
-                        Spacer()
-                    }
-                }
-            }
             .ignoresSafeArea(edges: .bottom)
+            .background(Color("ColorBackground"))
+            .overlay(
+                Rectangle()
+                    .fill(Color.black.opacity(0.3))
+                    .frame(height: 1),
+                alignment: .top
+            )
             
             if !tutorialPresented {
                 
-                Color.black.opacity(0.6)
+                Color.black.opacity(0.8)
                     .ignoresSafeArea()
                 
                 SwipeTutorialView()
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(0)
         .onTapGesture {
             guard !tutorialPresented else { return }
             tutorialPresented.toggle()

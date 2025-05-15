@@ -16,10 +16,10 @@ struct ContentView: View {
                         }
                     
                     HospitalView()
-                            .tabItem{
-                                Image(systemName: "house.fill")
-                                Text("Eka Hospital")
-                            }
+                        .tabItem{
+                            Image(systemName: "house.fill")
+                            Text("Eka Hospital")
+                        }
                 }
                 .onAppear{
                     let tabColor = UIColor(Color("ColorTabView"))
@@ -46,14 +46,6 @@ struct ContentView: View {
     }
 }
 
-
-struct ContentView_Previews: View {
-    @StateObject var viewModel: ContentViewModel = ContentViewModel()
-    var body: some View {
-        ContentView()
-    }
-}
-
 #Preview {
-    ContentView_Previews()
+    ContentView()
 }

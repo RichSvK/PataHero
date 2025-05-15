@@ -5,27 +5,30 @@ struct CardButton: View {
     let title: String
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Image(imageName)
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: UIScreen.main.bounds.width * 0.4)
+                .frame(maxWidth: .infinity, maxHeight: 130)
+                .frame(height: 130)
             
             Text(title)
-                .font(.title3)
+                .font(.body)
                 .foregroundColor(Color("ColorText"))
                 .multilineTextAlignment(.center)
+                .lineLimit(2)
                 .dynamicTypeSize(.medium ... .xxLarge)
                 .minimumScaleFactor(0.8)
-                .lineLimit(2)
+                .frame(maxHeight: .infinity, alignment: .top)
             
             Spacer()
         }
-        .frame(maxWidth: .infinity, alignment: .center)
-        .frame(height: 200)
-        .padding()
+        .frame(maxWidth: .infinity, maxHeight: 160, alignment: .top)
+        .padding(20)
         .background(Color("ColorCard"))
-        .cornerRadius(8)
+        .cornerRadius(10)
+        .shadow(color: .gray.opacity(0.3), radius: 4, x: 0, y: 4)
+
     }
 }
 

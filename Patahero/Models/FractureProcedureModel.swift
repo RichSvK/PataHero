@@ -1,5 +1,5 @@
-import Foundation
 import SwiftData
+import Foundation
 
 @Model
 class FractureProcedure: Identifiable {

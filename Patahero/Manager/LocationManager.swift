@@ -4,13 +4,13 @@ import CoreLocation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published private var locationManager: CLLocationManager = CLLocationManager()
-    private var hasSetInitialRegion = false
-
     @Published var userLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     @Published var region: MKCoordinateRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 0, longitude: 0),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
+    
+    private var hasSetInitialRegion = false
     
     override init() {
         super.init()
@@ -37,18 +37,23 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
                 print("Status otorisasi tidak diketahui")
         }
     }
+    
+    func stop(){
+        locationManager.stopUpdatingLocation()
+        print("Pembaruan lokasi dihentikan")
+    }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
-            print("Izin diberikan, memulai pembaruan lokasi")
-            manager.startUpdatingLocation()
-        case .restricted, .denied:
-            print("Akses lokasi ditolak")
-        case .notDetermined:
-            print("Izin belum ditentukan")
-        @unknown default:
-            break
+            case .authorizedWhenInUse, .authorizedAlways:
+                print("Izin diberikan, memulai pembaruan lokasi")
+                manager.startUpdatingLocation()
+            case .restricted, .denied:
+                print("Akses lokasi ditolak")
+            case .notDetermined:
+                print("Izin belum ditentukan")
+            @unknown default:
+                break
         }
     }
 

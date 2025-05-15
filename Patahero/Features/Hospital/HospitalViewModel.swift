@@ -9,21 +9,40 @@ class HospitalViewModel: ObservableObject {
     @Published var userLocationReady: Bool = false
     @Published var mapView = MKMapView()
     @Published var locationManager = LocationManager()
-    @Published var showCallAlert = false
-    private let phoneNumber = "081360986278"
 
     let hospitalLocation = CLLocationCoordinate2D(latitude: -6.298920889533608, longitude: 106.66991187639381)
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
+    func start() {
+        locationManager.start()
+               
+        guard cancellables.isEmpty else {
+           print("Sink sudah terdaftar, tidak perlu menambah lagi")
+           return
+        }
+
         locationManager.$userLocation
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] newLocation in
-                self?.userLocation = newLocation
-                self?.userLocationReady = true
-                self?.requestRoute()
-            }
-            .store(in: &cancellables)
+           .receive(on: DispatchQueue.main)
+           .sink { [weak self] newLocation in
+               self?.userLocation = newLocation
+               self?.userLocationReady = true
+               self?.requestRoute()
+           }
+           .store(in: &cancellables)
+       
+        print("Memulai tracking lokasi")
+    }
+    
+    func cleanUp() {
+        route = nil
+        userLocationReady = false
+        stopLocationUpdates()
+    }
+    
+    private func stopLocationUpdates(){
+        locationManager.stop()
+        cancellables.removeAll()
+        print("Menghentikan tracking lokasi")
     }
 
     func requestRoute() {
@@ -54,12 +73,11 @@ class HospitalViewModel: ObservableObject {
         }
     }
     
-    func makePhoneCall() {
-        if let phoneURL = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(phoneURL) {
-            UIApplication.shared.open(phoneURL)
-            showCallAlert = false
-        } else {
-            showCallAlert = true
-        }
+    func updateRegion(to target: CLLocationCoordinate2D){
+        cameraPosition = .region(MKCoordinateRegion(
+            center: target,
+            latitudinalMeters: 1000,
+            longitudinalMeters: 1000
+        ))
     }
 }

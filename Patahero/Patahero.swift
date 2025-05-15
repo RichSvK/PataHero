@@ -10,6 +10,5 @@ struct Patahero: App {
             ContentView()
         }
         .modelContainer(for: [Fracture.self, FractureProcedure.self])
-        
     }
 }
