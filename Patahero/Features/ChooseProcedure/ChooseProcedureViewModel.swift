@@ -4,48 +4,38 @@ import SwiftData
 class ChooseProcedureViewModel: ObservableObject {
     @FocusState var isFocused: Bool
     
-    private var allFractures: [Fracture] = []
     @Published var fractures: [Fracture] = []
-    
-    @Published var searchFractureText = "" {
-        didSet {
-            filterCategories()
-        }
-    }
-    
+    @Published var categories: [String] = []
     @Published var selectedCategory: String = "Semua" {
         didSet{
             filterCategories()
         }
     }
-    @Published var categories: [String] = []
     
+    private var allFractures: [Fracture] = []
     private var hasLoadedCategories = false
 
     func loadCategories(with fracturesData: [Fracture]) {
-        print("Loading categories data ...")
         guard !hasLoadedCategories else { return }
-        
-        self.allFractures = fracturesData
-        self.fractures = fracturesData
+        print("Loading categories data ...")
+
+        self.allFractures = fracturesData.sorted {$0.priority < $1.priority}
+        self.fractures = self.allFractures
 
         let unique = Set(fracturesData.map { $0.category })
         self.categories = ["Semua"] + unique.sorted()
-        hasLoadedCategories = true
+        
+        self.hasLoadedCategories = true
         print("Finished loaded categories data")
     }
 
     private func filterCategories(){
-        print("Filtering data with category: \(selectedCategory) and search: \(searchFractureText)")
-        let searchedResult = searchFractureText.isEmpty ? self.allFractures : allFractures.filter {
-            $0.name.localizedCaseInsensitiveContains(searchFractureText)
-        }
-
+        print("Filtering data with category: \(selectedCategory)")
+        
         if self.selectedCategory == "Semua" {
-            self.fractures = searchedResult
+            self.fractures = allFractures
         } else {
-            self.fractures = searchedResult.filter { $0.category == selectedCategory }
+            self.fractures = allFractures.filter { $0.category == selectedCategory }
         }
-        print("Finished searching data")
     }
 }

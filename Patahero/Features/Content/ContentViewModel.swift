@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Foundation
 
 class ContentViewModel: ObservableObject {
     @AppStorage("hasSeededInitialData") private(set) var hasSeededInitialData: Bool = false
@@ -9,7 +10,8 @@ class ContentViewModel: ObservableObject {
         guard !hasSeededInitialData else { return }
         print("Seeding Data")
         
-        let allProcedures = [armProcedure, fingerProcedure, wristProcedure, ankleProcedure, toesProcedure, fibulaProcedure]
+        var priority = 1
+        let allProcedures = [armProcedure, wristProcedure, fingerProcedure, fibulaProcedure, ankleProcedure, toesProcedure]
         
         Task{
             for (index, fracture) in listFracture.enumerated() {
@@ -20,6 +22,9 @@ class ContentViewModel: ObservableObject {
                         context.insert(procedure)
                     }
                 }
+                
+                fracture.priority = priority
+                priority += 1
                 context.insert(fracture)
             }
             

@@ -6,12 +6,7 @@ struct CallButton: View {
     
     var body: some View {
         Button(action: {
-            if let phoneURL = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(phoneURL){
-                UIApplication.shared.open(phoneURL)
-                showCallAlert = false
-            } else {
-                showCallAlert = true
-            }
+            makePhoneCall()
         }) {
             HStack {
                 Image(systemName: "phone.fill")
@@ -19,11 +14,7 @@ struct CallButton: View {
                     .dynamicTypeSize(.medium ... .xxLarge)
                 
                 Text("Hubungi Eka Hospital")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .lineLimit(1)
-                    .dynamicTypeSize(.medium ... .xxLarge)
-                    .minimumScaleFactor(0.8)
+                    .font(.system(size: 16, weight: .semibold))
             }
             .foregroundColor(.white)
             .padding()
@@ -31,13 +22,21 @@ struct CallButton: View {
         }
         .background(Color(.red))
         .cornerRadius(10)
-        .padding(.top)
         .alert("Error", isPresented: $showCallAlert){
             Button("Silahkan coba lagi") {
                 showCallAlert = false
             }
         } message: {
             Text("Gagal menghubungi Eka Hospital.")
+        }
+    }
+    
+    private func makePhoneCall() {
+        if let phoneURL = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(phoneURL){
+            UIApplication.shared.open(phoneURL)
+            showCallAlert = false
+        } else {
+            showCallAlert = true
         }
     }
 }

@@ -4,12 +4,14 @@ class ProcedureViewModel: ObservableObject {
     @Published var fractureName: String = ""
     @Published var procedures: [FractureProcedure] = []
     @Published var currentStep: Int = 1
-    var totalStep: Int = 0
+    @AppStorage("hasSeenSwipeTutorial") private(set) var hasSeenSwipeTutorial: Bool = false
     
-    init(fracture: Fracture){
-        print("Initializing ProcedureViewModel ...")
+    var totalStep: Int = 0
 
-        print("Loading \(fracture.name)  Procedures ...")
+    init(fracture: Fracture){
+        print("Initializing ProcedureViewModel")
+
+        print("Loading \(fracture.name) Procedures...")
         self.fractureName = fracture.name
         self.procedures = fracture.procedure.sorted { $0.order < $1.order }
         self.totalStep = self.procedures.count
@@ -33,6 +35,14 @@ class ProcedureViewModel: ObservableObject {
     private func goToPreviousStep() {
         if currentStep > 1 {
             currentStep -= 1
+        }
+    }
+    
+    func setSwipeTutorial(){
+        guard !self.hasSeenSwipeTutorial else { return }
+
+        DispatchQueue.main.async{
+            self.hasSeenSwipeTutorial = true
         }
     }
 }

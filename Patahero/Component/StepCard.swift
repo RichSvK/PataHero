@@ -9,7 +9,7 @@ struct StepCard: View {
                 .resizable()
                 .scaledToFit()
                 .cornerRadius(25)
-                .frame(maxWidth: .infinity, maxHeight: 300)
+                .frame(height: 300)
                 .padding(.vertical, 20)
             
             Text("Step \(procedure.order)")

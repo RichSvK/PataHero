@@ -3,8 +3,7 @@ import SwiftData
 
 struct ProcedureView: View {
     @StateObject var viewModel: ProcedureViewModel
-    @State private var tutorialPresented: Bool = false
-    
+
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -21,8 +20,6 @@ struct ProcedureView: View {
 
                             Spacer()
 
-                            CallButton()
-                                .padding(.bottom, 20)
                         }
                         .padding(.horizontal, 20)
                         .tag(index + 1)
@@ -34,18 +31,19 @@ struct ProcedureView: View {
                         viewModel.handleSwipe(value: value)
                     }
                 )
+                
+                CallButton()
+                    .padding(20)
             }
-            .ignoresSafeArea(edges: .bottom)
             .background(Color("ColorBackground"))
             .overlay(
                 Rectangle()
-                    .fill(Color.black.opacity(0.3))
+                    .fill(Color.black.opacity(0.2))
                     .frame(height: 1),
                 alignment: .top
             )
             
-            if !tutorialPresented {
-                
+            if !viewModel.hasSeenSwipeTutorial {
                 Color.black.opacity(0.8)
                     .ignoresSafeArea()
                 
@@ -55,8 +53,7 @@ struct ProcedureView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(0)
         .onTapGesture {
-            guard !tutorialPresented else { return }
-            tutorialPresented.toggle()
+            viewModel.setSwipeTutorial()
         }
     }
 }

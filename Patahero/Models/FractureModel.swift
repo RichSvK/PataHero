@@ -7,6 +7,7 @@ class Fracture: Identifiable {
     var name: String
     var imagePath: String
     var category: String
+    var priority: Int = 0
     
     // On Delete cascade
     @Relationship(deleteRule: .cascade)

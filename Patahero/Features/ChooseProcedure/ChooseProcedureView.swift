@@ -59,5 +59,5 @@ struct ChooseProcedureView: View{
 }
 
 #Preview {
-    ChooseProcedureView()
+   ChooseProcedureView()
 }
