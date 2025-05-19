@@ -7,15 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		791AD26C2DD9A627003C4B7A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 791AD26B2DD9A627003C4B7A /* WidgetKit.framework */; };
+		791AD26E2DD9A627003C4B7A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 791AD26D2DD9A627003C4B7A /* SwiftUI.framework */; };
+		791AD27B2DD9A628003C4B7A /* PataheroWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 791AD2692DD9A627003C4B7A /* PataheroWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7947C5752DAF8963000F1A4F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7947C5742DAF895F000F1A4F /* .gitignore */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		791AD2792DD9A628003C4B7A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7913356F2D93D32800C7EE87 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 791AD2682DD9A627003C4B7A;
+			remoteInfo = PataheroWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		791AD27C2DD9A628003C4B7A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				791AD27B2DD9A628003C4B7A /* PataheroWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		791335772D93D32800C7EE87 /* Patahero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patahero.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		791AD2692DD9A627003C4B7A /* PataheroWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PataheroWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		791AD26B2DD9A627003C4B7A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		791AD26D2DD9A627003C4B7A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		7947C5742DAF895F000F1A4F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		791AD2802DD9A628003C4B7A /* Exceptions for "PataheroWidget" folder in "PataheroWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 791AD2682DD9A627003C4B7A /* PataheroWidgetExtension */;
+		};
 		7955DCA82DA6E9F20027EB35 /* Exceptions for "Patahero" folder in "Patahero" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -34,6 +71,14 @@
 			path = Patahero;
 			sourceTree = "<group>";
 		};
+		791AD26F2DD9A627003C4B7A /* PataheroWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				791AD2802DD9A628003C4B7A /* Exceptions for "PataheroWidget" folder in "PataheroWidgetExtension" target */,
+			);
+			path = PataheroWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +86,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		791AD2662DD9A627003C4B7A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				791AD26E2DD9A627003C4B7A /* SwiftUI.framework in Frameworks */,
+				791AD26C2DD9A627003C4B7A /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +106,8 @@
 			children = (
 				7947C5742DAF895F000F1A4F /* .gitignore */,
 				791335792D93D32800C7EE87 /* Patahero */,
+				791AD26F2DD9A627003C4B7A /* PataheroWidget */,
+				791AD26A2DD9A627003C4B7A /* Frameworks */,
 				791335782D93D32800C7EE87 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,8 +116,18 @@
 			isa = PBXGroup;
 			children = (
 				791335772D93D32800C7EE87 /* Patahero.app */,
+				791AD2692DD9A627003C4B7A /* PataheroWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		791AD26A2DD9A627003C4B7A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				791AD26B2DD9A627003C4B7A /* WidgetKit.framework */,
+				791AD26D2DD9A627003C4B7A /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,10 +140,12 @@
 				791335732D93D32800C7EE87 /* Sources */,
 				791335742D93D32800C7EE87 /* Frameworks */,
 				791335752D93D32800C7EE87 /* Resources */,
+				791AD27C2DD9A628003C4B7A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				791AD27A2DD9A628003C4B7A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				791335792D93D32800C7EE87 /* Patahero */,
@@ -89,6 +157,28 @@
 			productReference = 791335772D93D32800C7EE87 /* Patahero.app */;
 			productType = "com.apple.product-type.application";
 		};
+		791AD2682DD9A627003C4B7A /* PataheroWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 791AD27F2DD9A628003C4B7A /* Build configuration list for PBXNativeTarget "PataheroWidgetExtension" */;
+			buildPhases = (
+				791AD2652DD9A627003C4B7A /* Sources */,
+				791AD2662DD9A627003C4B7A /* Frameworks */,
+				791AD2672DD9A627003C4B7A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				791AD26F2DD9A627003C4B7A /* PataheroWidget */,
+			);
+			name = PataheroWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = PataheroWidgetExtension;
+			productReference = 791AD2692DD9A627003C4B7A /* PataheroWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -96,11 +186,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1620;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					791335762D93D32800C7EE87 = {
 						CreatedOnToolsVersion = 16.2;
+					};
+					791AD2682DD9A627003C4B7A = {
+						CreatedOnToolsVersion = 16.3;
 					};
 				};
 			};
@@ -119,6 +212,7 @@
 			projectRoot = "";
 			targets = (
 				791335762D93D32800C7EE87 /* Patahero */,
+				791AD2682DD9A627003C4B7A /* PataheroWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -132,6 +226,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		791AD2672DD9A627003C4B7A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -142,7 +243,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		791AD2652DD9A627003C4B7A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		791AD27A2DD9A628003C4B7A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 791AD2682DD9A627003C4B7A /* PataheroWidgetExtension */;
+			targetProxy = 791AD2792DD9A628003C4B7A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		791335832D93D32900C7EE87 /* Debug */ = {
@@ -330,6 +446,60 @@
 			};
 			name = Release;
 		};
+		791AD27D2DD9A628003C4B7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PataheroWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PataheroWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Richard.Patahero.PataheroWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		791AD27E2DD9A628003C4B7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PataheroWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PataheroWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Richard.Patahero.PataheroWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -347,6 +517,15 @@
 			buildConfigurations = (
 				791335862D93D32900C7EE87 /* Debug */,
 				791335872D93D32900C7EE87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		791AD27F2DD9A628003C4B7A /* Build configuration list for PBXNativeTarget "PataheroWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				791AD27D2DD9A628003C4B7A /* Debug */,
+				791AD27E2DD9A628003C4B7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

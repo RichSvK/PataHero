@@ -24,12 +24,12 @@ struct StepCard: View {
             Spacer()
         }
         .padding(.horizontal, 25)
-        .frame(maxWidth: .infinity, maxHeight: 440)
+        .frame(maxWidth: .infinity, maxHeight: 450)
         .background(Color("ColorCard"))
         .cornerRadius(25)
     }
 }
 
 #Preview {
-    StepCard(procedure: ankleProcedure[0])
+    StepCard(procedure: armProcedure[2])
 }
