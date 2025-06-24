@@ -1,6 +1,6 @@
-import SwiftUI
-import MapKit
 import CoreLocation
+import MapKit
+import SwiftUI
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published private var locationManager: CLLocationManager = CLLocationManager()

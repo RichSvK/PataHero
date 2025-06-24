@@ -1,6 +1,5 @@
-import SwiftUI
 import SwiftData
-import Foundation
+import SwiftUI
 
 class ContentViewModel: ObservableObject {
     @AppStorage("hasSeededInitialData") private(set) var hasSeededInitialData: Bool = false

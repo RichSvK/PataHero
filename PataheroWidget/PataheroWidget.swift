@@ -1,6 +1,6 @@
-import WidgetKit
-import SwiftUI
 import AppIntents
+import SwiftUI
+import WidgetKit
 
 struct CallEkaHospitalIntent: AppIntent {
     static var title: LocalizedStringResource = "Hubungi Eka Hospital"
@@ -43,7 +43,7 @@ struct PataheroWidgetEntryView: View {
 
     var body: some View {
         HStack{
-            Image(systemName: "heart.fill")
+            Image(systemName: "plus.rectangle")
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.red)
             

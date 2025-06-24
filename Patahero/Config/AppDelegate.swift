@@ -1,6 +1,6 @@
 import SwiftUI
 
-// Lock screen for portrait orientation
+/// Lock screen for portrait orientation
 class AppDelegate: NSObject, UIApplicationDelegate {
     static var orientation: UIInterfaceOrientationMask = .portrait
     

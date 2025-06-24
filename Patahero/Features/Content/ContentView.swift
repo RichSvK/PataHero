@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
     @StateObject var viewModel: ContentViewModel = ContentViewModel()
@@ -25,11 +24,11 @@ struct ContentView: View {
                         .tag(1)
                 }
                 .onOpenURL{ url in
-                    if url == URL(string: "Patahero://hospital")! {
+                    if url == URL(string: "Patahero://hospital") {
                         selectedTab = 1
                     }
                     
-                    if url == URL(string: "Patahero://call")! {
+                    if url == URL(string: "Patahero://call") {
                         selectedTab = 1
                         
                         let phone = "tel://081360986278"

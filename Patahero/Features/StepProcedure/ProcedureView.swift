@@ -3,6 +3,7 @@ import SwiftData
 
 struct ProcedureView: View {
     @StateObject var viewModel: ProcedureViewModel
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         ZStack {
@@ -48,6 +49,27 @@ struct ProcedureView: View {
                     .ignoresSafeArea()
                 
                 SwipeTutorialView()
+            }
+        }
+        .onDisappear{
+            viewModel.setSwipeTutorial()
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+
+                Button(action: {
+                    if viewModel.hasSeenSwipeTutorial {
+                        dismiss()
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                        Text("Prosedur")
+                    }
+                    .foregroundColor(viewModel.hasSeenSwipeTutorial ? Color(red: 8 / 255, green: 110 / 255, blue: 221 / 255) : Color(red: 30 / 255, green: 78 / 255, blue: 134 / 255))
+                }
+
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

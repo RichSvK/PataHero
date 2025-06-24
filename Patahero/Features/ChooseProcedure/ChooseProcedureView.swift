@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct ChooseProcedureView: View{
     @StateObject var viewModel: ChooseProcedureViewModel = ChooseProcedureViewModel()

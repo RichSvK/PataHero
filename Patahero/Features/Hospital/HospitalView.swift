@@ -1,5 +1,5 @@
-import SwiftUI
 import MapKit
+import SwiftUI
 
 struct HospitalView: View {
     @StateObject private var viewModel: HospitalViewModel = HospitalViewModel()

@@ -1,4 +1,4 @@
-// Data Fracture
+/// Fracture Data List
 let listFracture = [
     Fracture(name: "Lengan", imagePath: "arm", category: "Tangan"),
     Fracture(name: "Pergelangan tangan", imagePath: "wrist", category: "Tangan"),

@@ -24,12 +24,13 @@ struct SwipeTutorialView: View {
             Spacer()
 
             Text("Klik layar untuk menutup tutorial")
-                .font(.system(size: 20, weight: .semibold))
+                .font(.system(size: 16, weight: .semibold))
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
                 .padding(.horizontal, 20)
+            Spacer()
         }
         .padding()
         .onAppear {

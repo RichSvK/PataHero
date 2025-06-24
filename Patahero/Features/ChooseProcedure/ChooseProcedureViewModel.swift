@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 
 class ChooseProcedureViewModel: ObservableObject {
     @FocusState var isFocused: Bool

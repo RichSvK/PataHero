@@ -1,6 +1,6 @@
-import SwiftUI
-import MapKit
 import Combine
+import MapKit
+import SwiftUI
 
 class HospitalViewModel: ObservableObject {
     @Published var cameraPosition: MapCameraPosition = .automatic

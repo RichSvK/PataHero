@@ -1,3 +1,4 @@
+/// Arm First Aid Procedure
 let armProcedure = [
     FractureProcedure(step: "Lilitkan perban untuk membalut lengan sebagai penyangga awal yang kuat", imagePath: "lengan_1", order: 1),
     FractureProcedure(step: "Gunakan kain segitiga untuk menopang lengan ke dada", imagePath: "lengan_2", order: 2),
@@ -5,6 +6,7 @@ let armProcedure = [
     FractureProcedure(step: "Hubungi kontak darurat Eka Hospital untuk penanganan lebih lanjut", imagePath: "hubungi_rumah_sakit", order: 4)
 ]
 
+/// Wrist First Aid Procedure
 let wristProcedure = [
     FractureProcedure(step: "Gunakan kain atau perban untuk menopang pergelangan tangan", imagePath: "pergelangan_1", order: 1),
     FractureProcedure(step: "Kompres es yang terbungkus dengan kain untuk mengurangi bengkak", imagePath: "pergelangan_2", order: 2),
@@ -12,6 +14,7 @@ let wristProcedure = [
     FractureProcedure(step: "Hubungi kontak darurat Eka Hospital untuk penanganan lebih lanjut", imagePath: "hubungi_rumah_sakit", order: 4)
 ]
 
+/// Finger First Aid Procedure
 let fingerProcedure = [
     FractureProcedure(step: "Balut jari yang patah dengan jari sebelahnya sebagai penyangga menggunakan kain kasa", imagePath: "finger_1", order: 1),
     FractureProcedure(step: "Kompres es yang terbungkus dengan kain untuk mengurangi bengkak", imagePath: "finger_2", order: 2),
@@ -19,6 +22,7 @@ let fingerProcedure = [
     FractureProcedure(step: "Hubungi kontak darurat Eka Hospital untuk penanganan lebih lanjut", imagePath: "hubungi_rumah_sakit", order: 4)
 ]
 
+/// Fibula First Aid Procedure
 let fibulaProcedure = [
     FractureProcedure(step: "Pastikan kaki tetap stabil dan tidak bergerak", imagePath: "fibula_1", order: 1),
     FractureProcedure(step: "Stabilkan kaki dengan bidai yang kokoh", imagePath: "fibula_2", order: 2),
@@ -26,6 +30,7 @@ let fibulaProcedure = [
     FractureProcedure(step: "Hubungi kontak darurat Eka Hospital untuk penanganan lebih lanjut", imagePath: "hubungi_rumah_sakit", order: 4)
 ]
 
+/// Ankle First Aid Procedure
 let ankleProcedure = [
     FractureProcedure(step: "Segera jauhkan dari aktivitas dan hentikan beban pada kaki yang cedera", imagePath: "ankle_1", order: 1),
     FractureProcedure(step: "Stabilkan pergelangan kaki dengan bidai atau bantalan yang kokoh", imagePath: "ankle_2", order: 2),
@@ -33,6 +38,7 @@ let ankleProcedure = [
     FractureProcedure(step: "Hubungi kontak darurat Eka Hospital untuk penanganan lebih lanjut", imagePath: "hubungi_rumah_sakit", order: 4)
 ]
 
+/// Toes First Aid Procedure
 let toesProcedure = [
     FractureProcedure(step: "Balut jari kaki yang cedera dengan kain kasa bersama jari lainnya secara longgar agar sirkulasi darah tetap lancar", imagePath: "toes_1", order: 1),
     FractureProcedure(step: "Letakkan kaki lebih tinggi dari permukaan tubuh untuk mengurangi pembengkakan dan rasa sakit", imagePath: "toes_2", order: 2),
